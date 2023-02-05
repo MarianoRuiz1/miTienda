@@ -12,6 +12,8 @@ export default ShopNavigator = () => {
     <Stack.Navigator
       initialRouteName="Categories"
       screenOptions={{
+        //headerStyle: { backgroundColor: COLORS.priamry },
+        //headerTintColor: COLORS.secondary,
         headerShadowVisible: false,
         headerTitleStyle: {
           fontWeight: "bold",
@@ -22,7 +24,7 @@ export default ShopNavigator = () => {
         name="Categories"
         component={CategoriesScreen}
         options={{
-          title: "Tadashi - Música & Libros",
+          title: "Tadashi - Libros & Música",
         }}
       />
       <Stack.Screen

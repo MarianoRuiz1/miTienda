@@ -1,19 +1,19 @@
-import { StyleSheet, Text, View } from 'react-native';
-
-import ShopNavigatior from './src/navigation/ShopNavigatior';
-import { useFonts } from "expo-font";
+import { useFonts } from "expo-font"
+import { NavigationContainer } from "@react-navigation/native"
+import BottomTabNavigator from "./src/navigation/BottomTabNavigator"
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    RobotoCondensed: require("./src/assets/fonts/RobotoCondensed-Bold.ttf")
+    DancingSCript: require("./src/assets/fonts/DancingScript-Regular.ttf"),
   })
 
-  
   if (!fontsLoaded) {
-    return null;
+    return null
   }
 
   return (
-    <ShopNavigatior/>
-  );
+    <NavigationContainer>
+      <BottomTabNavigator />
+    </NavigationContainer>
+  )
 }

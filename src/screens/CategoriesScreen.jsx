@@ -1,12 +1,29 @@
-import { Button, StyleSheet, Text, View } from 'react-native'
-
-import React from 'react'
+import React from "react"
+import { Button, StyleSheet, Text, View, FlatList } from "react-native"
+import CategoriesItem from "../components/CategoriesItem"
+import { CATEGORIES } from "../data/categories"
 
 const CategoriesScreen = ({ navigation }) => {
+  const handleSelectedCategory = item => {
+    navigation.navigate("Products", {
+      categoryId: item.id,
+      title: item.title,
+    })
+  }
+
+  const renderCategoriesItem = ({ item }) => (
+    <View style={styles.categoriesContainer}>
+      <CategoriesItem item={item} onSelected={handleSelectedCategory} />
+    </View>
+  )
+
   return (
     <View style={styles.container}>
-      <Text>CategoriesScreen</Text>
-      <Button style={styles.button} title='Go to Products' onPress={() => navigation.navigate("Products")}/>
+      <FlatList
+        data={CATEGORIES}
+        renderItem={renderCategoriesItem}
+        keyExtractor={item => item.id}
+      />
     </View>
   )
 }
@@ -14,18 +31,14 @@ const CategoriesScreen = ({ navigation }) => {
 export default CategoriesScreen
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    button: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      paddingVertical: 12,
-      paddingHorizontal: 32,
-      borderRadius: 4,
-      elevation: 3,
-      backgroundColor: 'black',
-    },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
+  },
+  categoriesContainer: {
+    padding: 15,
+    height: 150,
+  },
 })
