@@ -6,44 +6,21 @@ import {
   View,
 } from "react-native"
 
-import { ORDER } from "../data/order"
+import { ORDERS } from "../data/order"
 import OrderItem from "../components/OrderItem"
 import React from "react"
 
 const OrdersScreen = () => {
-  const total = 6600
 
-  const handleConfirmOrders = () => {
-    console.log("Confirmar Ordenes")
-  }
-
-  const handleDeleteItem = () => {
-    console.log("borrar elemento")
-  }
-
-  const renderOrderItem = ({ item }) => (
-    <OrderItem item={item} onDelete={handleDeleteItem} />
+  const renderOrderItem = ({item}) => (
+    <OrderItem item={item} onDelete={() => console.log("on delete")}/>
   )
-
   return (
-    <View style={styles.container}>
-      <View style={styles.list}>
-        <FlatList
-          data={ORDER}
-          keyExtractor={item => item.id}
-          renderItem={renderOrderItem}
-        />
-      </View>
-      <View style={styles.footer}>
-        <TouchableOpacity style={styles.confirm} onPress={handleConfirmOrders}>
-          <Text>Confirmar</Text>
-          <View style={styles.total}>
-            <Text style={styles.text}>Total</Text>
-            <Text style={styles.text}>${total}</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    </View>
+    <FlatList
+    data={ORDERS}
+    keyExtractor= {item => item.id}
+    renderItem={renderOrderItem}
+    />
   )
 }
 

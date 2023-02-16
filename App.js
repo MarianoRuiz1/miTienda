@@ -1,19 +1,23 @@
-import { useFonts } from "expo-font"
-import { NavigationContainer } from "@react-navigation/native"
-import BottomTabNavigator from "./src/navigation/BottomTabNavigator"
+import BottomTabNavigator from "./src/navigation/BottomTabNavigator";
+import { NavigationContainer } from "@react-navigation/native";
+import { Provider } from "react-redux";
+import store from "./src/store";
+import { useFonts } from "expo-font";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
     DancingSCript: require("./src/assets/fonts/DancingScript-Regular.ttf"),
-  })
+  });
 
   if (!fontsLoaded) {
-    return null
+    return null;
   }
 
   return (
-    <NavigationContainer>
-      <BottomTabNavigator />
-    </NavigationContainer>
-  )
+    <Provider store={store}>
+      <NavigationContainer>
+        <BottomTabNavigator />
+      </NavigationContainer>
+    </Provider>
+  );
 }

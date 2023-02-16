@@ -3,19 +3,21 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import Ionicons from "@expo/vector-icons/Ionicons"
 import React from "react"
 
+const formatDay = (time) => {
+  const date = new Date(time)
+  return date.toLocaleDateString()
+}
+
 const OrderItem = ({ item, onDelete }) => {
   return (
-    <View style={styles.item}>
+    <View style={styles.order}>
       <View>
-        <Text style={styles.header}>{item.name}</Text>
+        <Text style={styles.date}>{formatDay(item.date)}</Text>
+        <Text style={styles.total}>Total</Text>
       </View>
-      <View style={styles.detail}>
-        <View>
-          <Text>Cantidad: {item.quantity}</Text>
-          <Text>${item.price}</Text>
-        </View>
+      <View>
         <TouchableOpacity onPress={() => onDelete()}>
-          <Ionicons name="trash" size={24} color="red" />
+          <Ionicons name="md-trash" color={"red"} size={22}/>
         </TouchableOpacity>
       </View>
     </View>
@@ -25,20 +27,20 @@ const OrderItem = ({ item, onDelete }) => {
 export default OrderItem
 
 const styles = StyleSheet.create({
-  item: {
-    flex: 1,
-    padding: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+  order: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 10,
+    margin: 10,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderRadius: 6,
   },
-  header: {
+  date: {
     fontSize: 18,
   },
-  detail: {
-    flex: 1,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "center",
-    justifyContent: "space-between",
+  total: {
+    fontSize: 18,
   },
 })
