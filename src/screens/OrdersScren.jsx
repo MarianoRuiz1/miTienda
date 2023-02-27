@@ -5,19 +5,28 @@ import {
   TouchableOpacity,
   View,
 } from "react-native"
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 
-import { ORDERS } from "../data/order"
 import OrderItem from "../components/OrderItem"
-import React from "react"
+import { deleteOrder, getOrders } from "../store/actions/order.action"
 
 const OrdersScreen = () => {
-
+  const dispatch = useDispatch()
+  const orders = useSelector(state => state.orders.list)
+  useEffect(() => {
+    dispatch(getOrders())
+  }, [])
+  
+  const handleDeleteItem = (id) => {
+    dispatch(deleteOrder(id))
+  }
   const renderOrderItem = ({item}) => (
-    <OrderItem item={item} onDelete={() => console.log("on delete")}/>
+    <OrderItem item={item} onDelete={() => handleDeleteItem(item.id)}/>
   )
   return (
     <FlatList
-    data={ORDERS}
+    data={orders}
     keyExtractor= {item => item.id}
     renderItem={renderOrderItem}
     />
