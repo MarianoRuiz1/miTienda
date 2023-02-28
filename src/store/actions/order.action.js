@@ -34,7 +34,7 @@ export const deleteOrder = (id) => {
                     "Content-Type": "application/json"
                 }
             })
-            dispatch({type: DELETE_ORDER, oerderID: id})
+            dispatch({type: DELETE_ORDER, orderId: id})
         } catch (error) {
             console.log(error.message)
         }
